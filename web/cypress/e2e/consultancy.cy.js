@@ -1,3 +1,5 @@
+import consultancyData from '../fixtures/consultancy.json'
+
 describe('Fomulário de Consultoria', () => {
 
     before(() => {
@@ -9,12 +11,13 @@ describe('Fomulário de Consultoria', () => {
         cy.log('Isto aqui acontece antes de todos os testes')
         cy.goTo('Formulários', 'Consultoria')
 
-        cy.fixture('consultancy.json').as('consultancyData') // ou cy.fixture('consultancy')
+//        cy.fixture('consultancy.json').as('consultancyData') // ou cy.fixture('consultancy') Obriga em vez de ()=> colocar function() e usar  const consultancyForm = this.consultancyData.personal (sem o import consultancyData from '../fixtures/consultancy.json' no inicio do .js)
+
     })
 
-    it('Deve solicitar consultoria individual', function () {
+    it('Deve solicitar consultoria individual', () => {
 
-        const consultancyForm = this.consultancyData.personal
+        const consultancyForm = consultancyData.personal
 
         cy.get('#name').type(consultancyForm.name)
 
@@ -130,15 +133,15 @@ describe('Fomulário de Consultoria', () => {
             .click()
     })
 
-    it('Deve solicitar consultoria in company', function () {
+    it('Deve solicitar consultoria in company', () => {
 
-        const consultancyForm = this.consultancyData.company
+        const consultancyForm = consultancyData.company
 
         cy.get('#name').type(consultancyForm.name)
 
         cy.get('#email').type(consultancyForm.email)
 
-        //preencher campos com formatação e validar se ficou bem aplicada
+        //preencher campos com formatação e validar se ficou bem aplicada   
         cy.get('#phone')
             .type(consultancyForm.phone)
         //                    .should('have.value', '(11) 99999-1000')
@@ -248,48 +251,48 @@ describe('Fomulário de Consultoria', () => {
             .click()
     })
 
-    it('Deve verificar os campos obrigatórios', () => {
-        cy.contains('button', 'Enviar formulário')
-            .click()
+it('Deve verificar os campos obrigatórios', () => {
+    cy.contains('button', 'Enviar formulário')
+        .click()
 
-        cy.contains('label', 'Nome Completo')
-            .parent()
-            .find('p')
-            .should('have.text', 'Campo obrigatório')
-            .should('be.visible')
-            .and('have.class', 'text-red-400')
-            .and('have.css', 'color', 'rgb(248, 113, 113)')
+    cy.contains('label', 'Nome Completo')
+        .parent()
+        .find('p')
+        .should('have.text', 'Campo obrigatório')
+        .should('be.visible')
+        .and('have.class', 'text-red-400')
+        .and('have.css', 'color', 'rgb(248, 113, 113)')
 
-        cy.contains('label', 'Email')
-            .parent()
-            .find('p')
-            .should('have.text', 'Campo obrigatório')
-            .should('be.visible')
-            .and('have.class', 'text-red-400')
-            .and('have.css', 'color', 'rgb(248, 113, 113)')
+    cy.contains('label', 'Email')
+        .parent()
+        .find('p')
+        .should('have.text', 'Campo obrigatório')
+        .should('be.visible')
+        .and('have.class', 'text-red-400')
+        .and('have.css', 'color', 'rgb(248, 113, 113)')
 
-        cy.contains('label', 'Email *')
-            .parent()
-            .find('p')
-            .should('have.text', 'Campo obrigatório')
-            .should('be.visible')
-            .and('have.class', 'text-red-400')
-            .and('have.css', 'color', 'rgb(248, 113, 113)')
+    cy.contains('label', 'Email *')
+        .parent()
+        .find('p')
+        .should('have.text', 'Campo obrigatório')
+        .should('be.visible')
+        .and('have.class', 'text-red-400')
+        .and('have.css', 'color', 'rgb(248, 113, 113)')
 
-        cy.contains('label', 'termos de uso')
-            .parent()
-            .find('p')
-            .should('have.text', 'Você precisa aceitar os termos de uso')
-            .should('be.visible')
-            .and('have.class', 'text-red-400')
-            .and('have.css', 'color', 'rgb(248, 113, 113)')
-    })
+    cy.contains('label', 'termos de uso')
+        .parent()
+        .find('p')
+        .should('have.text', 'Você precisa aceitar os termos de uso')
+        .should('be.visible')
+        .and('have.class', 'text-red-400')
+        .and('have.css', 'color', 'rgb(248, 113, 113)')
+})
 
-    afterEach(() => {
-        cy.log('Isto aqui acontece após cada teste')
-    })
+afterEach(() => {
+    cy.log('Isto aqui acontece após cada teste')
+})
 
-    after(() => {
-        cy.log('Isto aqui acontece depois de todos os testes')
-    })
+after(() => {
+    cy.log('Isto aqui acontece depois de todos os testes')
+})
 })        
