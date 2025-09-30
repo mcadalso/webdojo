@@ -26,8 +26,17 @@ describe('Fomulário de Consultoria', () => {
         cy.validateConsultancyModal()
     })
 
-    it.only('Deve verificar os campos obrigatórios', () => {
+    it('Deve verificar os campos obrigatórios', () => {
         cy.submitConsultancyForm()
+        /*        const requiredFields = [
+                    { label: 'Nome Completo', message: 'Campo obrigatório' },
+                    { label: 'Email', message: 'Campo obrigatório' },
+                    { label: 'termos de uso', message: 'Você precisa aceitar os termos de uso' }
+                ]
+        
+                requiredFields.forEach(({ label, message }) => {
+                    cy.validateMandatoryFields(label, message)
+                })*/
         cy.validateMandatoryFields('Nome Completo', 'Campo obrigatório')
         cy.validateMandatoryFields('Email', 'Campo obrigatório')
         cy.validateMandatoryFields('termos de uso', 'Você precisa aceitar os termos de uso')

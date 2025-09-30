@@ -124,13 +124,4 @@ Cypress.Commands.add('validateConsultancyModal', () => {
         .click()
 })
 
-Cypress.Commands.add('validateMandatoryFields', (label, text) => {
-    cy.contains('label', label)
-        .parent()
-        .find('p')
-        .should('have.text', text)
-        .should('be.visible')
-        .and('have.class', 'text-red-400')
-        .and('have.css', 'color', 'rgb(248, 113, 113)')
-})
 

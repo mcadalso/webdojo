@@ -26,6 +26,7 @@
 
 import 'cypress-real-events'
 import './actions/consultancy.actions'
+import './actions/github.actions'
 
 Cypress.Commands.add('start', () => {
     //cy.viewport('iphone-x')    
@@ -53,4 +54,14 @@ Cypress.Commands.add('goTo', (buttonName, pageTitle) => {
 Cypress.Commands.add('login', () => {
     cy.start()
     cy.submitLoginForm('papito@webdojo.com', 'katana123')
+})
+
+Cypress.Commands.add('validateMandatoryFields', (label, text) => {
+    cy.contains('label', label)
+        .parent()
+        .find('p')
+        .should('have.text', text)
+        .should('be.visible')
+        .and('have.class', 'text-red-400')
+        .and('have.css', 'color', 'rgb(248, 113, 113)')
 })
