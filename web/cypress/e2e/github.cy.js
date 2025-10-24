@@ -10,7 +10,7 @@ describe('Gerenciamento de perfis de GitHub', () => {
         cy.goTo('Tabela', 'Perfis do GitHub')
         //        cy.fixture('consultancy.json').as('consultancyData') // ou cy.fixture('consultancy') Obriga em vez de ()=> colocar function() e usar  const consultancyForm = this.consultancyData.personal (sem o import consultancyData from '../fixtures/consultancy.json' no inicio do .js)
     })
-    
+
     it('Deve poder cadastrar um novo perfil do github', () => {
 
         /*cy.fillGithubForm('Fernando Papito', 'qapapito', 'QA')
@@ -35,7 +35,7 @@ describe('Gerenciamento de perfis de GitHub', () => {
 
         tableData.forEach(({ name, username, profile }) => {
             cy.fillGithubForm(name, username, profile)
-        
+
             cy.contains('table tbody tr', username)
                 .should('be.visible')
                 .as('trKey')
@@ -63,6 +63,51 @@ describe('Gerenciamento de perfis de GitHub', () => {
             .should('be.visible')*/
     })
 
+    it('Deve poder remover um perfil do github', () => {
+
+
+        const profile = {
+            name: 'Fernando Papito',
+            username: 'papito123',
+            desc: 'QA'
+        }
+
+
+        cy.fillGithubForm(profile.name, profile.username, profile.desc)
+
+        cy.contains('table tbody tr', profile.username)
+            .should('be.visible')
+            .as('trKey')
+
+        cy.get('@trKey').find('button[title="Remover perfil"]').click()
+
+
+        cy.contains('table tbody', profile.username)
+            .should('not.exist')
+    })
+
+    it.only('Deve validar o link do github', () => {
+
+
+        const profile = {
+            name: 'Fernando Papito',
+            username: 'papitodev',
+            desc: 'QA'
+        }
+
+
+        cy.fillGithubForm(profile.name, profile.username, profile.desc)
+
+        cy.contains('table tbody tr', profile.username)
+            .should('be.visible')
+            .as('trKey')
+
+
+        cy.get('@trKey').find('a')
+            .should('have.attr', 'href', 'https://github.com/' + profile.username)
+            .and('have.attr', 'target', '_blank')  //valida se ao clicar vai para outra aba ou janela (_blank)
+
+    })
 
     it('Deve verificar os campos obrigatórios', () => {
         cy.submitGithubForm()
