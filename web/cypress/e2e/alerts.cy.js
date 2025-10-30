@@ -35,9 +35,19 @@ describe('Validações de Alertas em JavaScript', () => {
         })
 
         cy.contains('button', 'Mostrar Confirm').click()
-
-
     })
 
+    it('Deve interagir com um prompt, inserir um texto e validar uma mensagem', () => {
+        cy.window().then((win) => {
+            cy.stub(win, 'prompt').returns('Fernando')
+
+        })
+
+        cy.on('window:alert', (msg) => {
+            expect(msg).to.equal('Olá Fernando! Boas vindas ao WebDojo!')
+        })
+
+        cy.contains('button', 'Mostrar Prompt').click()
+    })
 
 })        
