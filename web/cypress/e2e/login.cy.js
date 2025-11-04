@@ -1,3 +1,5 @@
+import { getTodayDate, MD5RegularExpression} from "../support/utils"
+
 describe('login', () => {
   it('Deve logar com sucesso', () => {
     cy.login()
@@ -9,6 +11,21 @@ describe('login', () => {
     cy.get('[data-cy="welcome-message"]')
       .should('be.visible')
       .and('have.text', 'Olá QA, esse é o seu Dojo para aprender Automação de Testes.')
+
+    cy.getCookie('login_date').should('exist')
+
+    cy.getCookie('login_date').should((cookie) => {
+      expect(cookie.value).to.eq(getTodayDate())
+
+    })
+    cy.window().then((win) => {
+      const token = win.localStorage.getItem('token')
+      expect(token).to.exist
+
+      expect(token).to.eq('e1033d63a53fe66c0fd3451c7fd8f617')
+      expect(token).to.match(MD5RegularExpression)
+
+    })
   })
 
   it('Não deve logar com senha inválida', () => {

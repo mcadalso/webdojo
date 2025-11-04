@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "serve -s dist -p 3000",
-    "teste": "concurrently \"npm run dev\" \"npx cypress run\""
+    "test": "concurrently \"npm run dev\" \"npx cypress run\"",
+    "openUi": "npx cypress open",
+    "testRun": "npx cypress run"
   },
   "dependencies": {
     "cypress-real-events": "^1.14.0",
