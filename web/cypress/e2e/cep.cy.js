@@ -24,10 +24,10 @@ describe('CEP', () => {
                 .should('have.value', 'SP')
         })*/
 
-    it('Deve validar a consulta de CEP, mas com constante definida no fisture cep.json', () => {
+    it('Deve validar a consulta de CEP, mas com constante definida no fixture cep.json', () => {
 
-        cy.intercept('GET', `https://viacep.com.br/ws/${address.cep}/json/`, {
-            statusCode: 200,            
+      /*  cy.intercept('GET', `https://viacep.com.br/ws/${address.cep}/json/`, {
+            statusCode: 200,
             body: {
                 logradouro: address.street,
                 bairro: address.neighborhood,
@@ -35,11 +35,13 @@ describe('CEP', () => {
                 uf: address.state
             }
         }).as('getCep')
+        //para simular o retorno da API*/
 
         cy.get('#cep').type(address.cep)
         cy.contains('button', 'Buscar').click()
 
-        cy.wait('@getCep')
+        /*cy.wait('@getCep')
+        //para simular o retorno da API*/
 
         cy.get('#street')
             .should('have.value', address.street)

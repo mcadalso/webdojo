@@ -4,6 +4,8 @@ describe('iFrame', () => {
 
         cy.contains('Video').click()
 
+        cy.wait(1000)  //esperar que carrege para encontrar o botão de play
+
         cy.get('iframe[title="Video Player"]').click()
             .should('exist')
             .its('0.contentDocument.body') //array posição 0 conteúdo do body
