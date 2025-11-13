@@ -1,6 +1,10 @@
-import { getTodayDate, MD5RegularExpression} from "../support/utils"
+import { getTodayDate, MD5RegularExpression } from "../support/utils"
 
 describe('login', () => {
+  // beforeEach(() => {
+  //   cy.viewport("iphone-xr")
+  // })
+  
   it('Deve logar com sucesso', () => {
     cy.login()
 
