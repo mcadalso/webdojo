@@ -6,7 +6,6 @@
     "dev": "serve -s dist -p 3000",
     "test": "npx cypress run --config viewportWidth=1440,viewportHeight=900",
     "testConc": "concurrently \"npm run dev\" \"npx cypress run\"",
-
     "openUi": "npx cypress open",
     "testRun": "npx cypress run",
     "test:login": "npx cypress run --spec cypress/e2e/login.cy.js --config viewportWidth=1440,viewportHeight=900",
