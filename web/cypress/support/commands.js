@@ -42,6 +42,13 @@ Cypress.Commands.add('submitLoginForm', (email, senha) => {
     cy.contains('button', 'Entrar').click()
 })
 
+Cypress.Commands.add('goToSignup', () => {
+    cy.start()
+    cy.get('a[href="/register"]').click()
+    cy.contains('h2', 'Crie sua conta')
+        .should('be.visible')
+})
+
 Cypress.Commands.add('goTo', (buttonName, pageTitle) => {
     cy.contains('button', buttonName)
         .should('be.visible')
