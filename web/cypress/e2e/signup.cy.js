@@ -2,12 +2,12 @@ describe('cadastro', () => {
 
     beforeEach(() => {
         cy.goToSignup()
-        cy.intercept('POST', 'http://localhost:3333/api/users/register', {
-            statusCode: 201, 
-            body: {
-                message: 'Conta criada com sucesso'
-            }
-        }).as('postSignup')
+        // cy.intercept('POST', 'http://localhost:3333/api/users/register', {
+        //     statusCode: 201, 
+        //     body: {
+        //         message: 'Conta criada com sucesso'
+        //     }
+        // }).as('postSignup')
     })
 
     it('Deve cadastrar um novo usuário', () => {
@@ -18,10 +18,10 @@ describe('cadastro', () => {
 
         cy.contains('button', 'Criar conta').click()
 
-        cy.wait('@postSignup')
+        // cy.wait('@postSignup')
 
         cy.contains('Conta criada com sucesso!')
-        .should('be.visible')
+            .should('be.visible')
     })
 
 })
