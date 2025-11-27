@@ -3,13 +3,13 @@
 services:
   # Serviço de banco de dados PostgreSQL
   db:
-    container_name: dojo-db
+    container_name: PostgreSQL 17
     image: postgres:13
     environment:
-      - POSTGRES_USER=dba                 # Usuário do banco de dados
-      - POSTGRES_PASSWORD=dba             # Senha do banco de dados
+      - POSTGRES_USER=postgres                 # Usuário do banco de dados
+      - POSTGRES_PASSWORD=password             # Senha do banco de dados
       - POSTGRES_DB=UserDB                # Nome do banco de dados a ser criado
-      - POSTGRES_ROOT_PASSWORD=dba        # Senha do superusuário
+      - POSTGRES_ROOT_PASSWORD=password        # Senha do superusuário
       - TZ=America/Sao_Paulo              # Fuso horário
     ports:
       - "5432:5432"                       # Mapeamento da porta do banco de dados
